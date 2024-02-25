@@ -1,6 +1,12 @@
 local set = vim.keymap.set
 local desc = function(d) return { desc = d } end
 local capabilities = nil
+local so = function(id,after)
+    vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id)
+    if after then
+        vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id .. "/after")
+    end
+end
 
 
 local function on_attach(ev)
@@ -51,7 +57,6 @@ local function lsp_setup()
                 capabilities = capabilities
             }
         end,
-        -- ["tsserver"] = function () end
         lua_ls = lua_ls,
     }
 
@@ -77,33 +82,6 @@ end
 
 local function cmp_setup()
     local cmp = require('cmp')
-
-    require("cmp_nvim_lsp").setup()
-    cmp.register_source('buffer', require('cmp_buffer'))
-    cmp.register_source('path', require('cmp_path').new())
-    cmp.register_source('cmdline', require('cmp_cmdline').new())
-
-    --#region
-    cmp.register_source("luasnip", require("cmp_luasnip").new())
-
-    local cmp_luasnip = vim.api.nvim_create_augroup("cmp_luasnip", {})
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "LuasnipCleanup",
-      callback = function ()
-        require("cmp_luasnip").clear_cache()
-      end,
-      group = cmp_luasnip
-    })
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "LuasnipSnippetsAdded",
-      callback = function ()
-        require("cmp_luasnip").refresh()
-      end,
-      group = cmp_luasnip
-    })
-    --#endregion
 
     require("luasnip.loaders.from_vscode").load({paths = "./snippets"})
 
@@ -154,37 +132,43 @@ local function cmp_setup()
     capabilities = require('cmp_nvim_lsp').default_capabilities()
 end
 
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/nvim-lspconfig")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/mason.nvim")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/mason-lspconfig.nvim")
+local function extra_setup()
+    require("flutter-tools").setup({
+        lsp = {
+            capabilities = capabilities,
+            on_attach = on_attach
+        }
+    })
 
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/nvim-cmp")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/cmp-nvim-lsp")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/cmp-buffer")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/cmp-path")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/cmp-cmdline")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/LuaSnip")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/cmp_luasnip")
 
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/fidget.nvim")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/trouble.nvim")
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/neodev.nvim")
+    local trouble = require("trouble")
+    trouble.setup({ icons = false })
+    set("n", "<leader>tt", trouble.toggle, desc("Trouble: toggle"))
+    set("n", "]d", function() trouble.next({ skip_groups = true, jump = true }) end,     desc("Trouble: next"))
+    set("n", "[d", function() trouble.previous({ skip_groups = true, jump = true }) end, desc("Trouble: previous"))
+end
+
+so("nvim-lspconfig")
+so("mason.nvim")
+so("mason-lspconfig.nvim")
+
+so("nvim-cmp")
+so("cmp-nvim-lsp",1)
+so("cmp-buffer",1)
+so("cmp-path",1)
+so("cmp-cmdline",1)
+so("LuaSnip")
+so("cmp_luasnip",1)
+
+so("neodev.nvim")
+
 
 lsp_setup()
 cmp_setup()
 
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/flutter-tools.nvim")
 
-require("flutter-tools").setup({
-    lsp = {
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-})
+so("flutter-tools.nvim")
+so("trouble.nvim")
 
-local trouble = require("trouble")
-trouble.setup({ icons = false })
-set("n", "<leader>tt", trouble.toggle, desc("Trouble: toggle"))
-set("n", "]d", function() trouble.next({ skip_groups = true, jump = true }) end,     desc("Trouble: next"))
-set("n", "[d", function() trouble.previous({ skip_groups = true, jump = true }) end, desc("Trouble: previous"))
+extra_setup()
 
