@@ -1,0 +1,16 @@
+{
+	"name": "example-snippets",
+	"contributes": {
+		"snippets": [
+            {
+                "language": [
+                    "javascript", "typescript",
+                    "js","ts",
+                    "jsx", "tsx",
+                    "svelte"
+                ],
+                "path": "./js.json"
+            }
+		]
+	}
+}

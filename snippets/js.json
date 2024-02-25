@@ -1,0 +1,110 @@
+{
+	"if": {
+		"prefix": "if",
+		"body": [
+            "if ($0) {",
+            "    ",
+            "}"
+		]
+	},
+	"else if": {
+		"prefix": "elseif",
+		"body": [
+            "else if ($0) {",
+            "    ",
+            "}"
+		]
+	},
+	"function": {
+		"prefix": ["func", "fn"],
+		"body": [
+            "function $0() {",
+            "    ",
+            "}"
+		]
+	},
+	"export function": {
+		"prefix": ["efunc", "efn"],
+		"body": [
+            "export function $0() {",
+            "    ",
+            "}"
+		]
+	},
+	"export async function": {
+		"prefix": ["eafunc", "eafn"],
+		"body": [
+            "export async function $0() {",
+            "    ",
+            "}"
+		]
+	},
+	"async func": {
+		"prefix": "asyn",
+		"body": [
+            "async function $0() {",
+            "    ",
+            "}"
+		]
+	},
+	"doc type": {
+		"prefix": "dt",
+		"body": [
+            "/** @type {$0} */"
+		]
+	},
+	"doc param": {
+		"prefix": "dp",
+		"body": [
+            "/** @param {$0} a */"
+		]
+	},
+    "console.log": {
+		"prefix": "cls",
+		"body": [
+            "console.log(\"$0\")"
+		]
+    },
+    "arrow func": {
+		"prefix": "arr",
+		"body": [
+            "($0) => {}"
+		]
+    },
+    "sveltekit load": {
+		"prefix": "kitload",
+		"body": [
+            "export const load = ({ }: RequestEvent) => {",
+            "    ",
+            "}"
+		]
+    },
+    "sveltekit actions": {
+		"prefix": "kitactions",
+		"body": [
+            "export const actions: Actions = {",
+            "    async $0() {",
+            "        ",
+            "    }",
+            "}"
+		]
+    },
+    "sveltekit import": {
+		"prefix": "kitjs",
+		"body": [
+            "import { $0 } from \"@sveltejs/kit\""
+		]
+    },
+    "import": {
+		"prefix": "impor",
+		"body": [
+            "import { } from \"$0\""
+		]
+    },
+    "check if its browser": {
+		"prefix": "isbrowser",
+		"body": [
+            "typeof process == 'undefined'"
+		]
+    }
+}

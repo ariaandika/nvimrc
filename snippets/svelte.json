@@ -1,0 +1,8 @@
+{
+	"function": {
+		"prefix": "sct",
+		"body": [
+            "<script lang=\"ts\">", "", "</script>"
+		]
+	}
+}
