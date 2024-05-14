@@ -1,110 +1,138 @@
 {
-	"if": {
-		"prefix": "if",
-		"body": [
+    "if": {
+        "prefix": "if",
+        "body": [
             "if ($0) {",
             "    ",
             "}"
-		]
-	},
-	"else if": {
-		"prefix": "elseif",
-		"body": [
+        ]
+    },
+    "else if": {
+        "prefix": "elseif",
+        "body": [
             "else if ($0) {",
             "    ",
             "}"
-		]
-	},
-	"function": {
-		"prefix": ["func", "fn"],
-		"body": [
+        ]
+    },
+    "function": {
+        "prefix": ["func", "fn"],
+        "body": [
             "function $0() {",
             "    ",
             "}"
-		]
-	},
-	"export function": {
-		"prefix": ["efunc", "efn"],
-		"body": [
+        ]
+    },
+    "export function": {
+        "prefix": ["efunc", "efn"],
+        "body": [
             "export function $0() {",
             "    ",
             "}"
-		]
-	},
-	"export async function": {
-		"prefix": ["eafunc", "eafn"],
-		"body": [
+        ]
+    },
+    "export async function": {
+        "prefix": ["eafunc", "eafn"],
+        "body": [
             "export async function $0() {",
             "    ",
             "}"
-		]
-	},
-	"async func": {
-		"prefix": "asyn",
-		"body": [
+        ]
+    },
+    "async func": {
+        "prefix": ["asyn","async"],
+        "body": [
             "async function $0() {",
             "    ",
             "}"
-		]
-	},
-	"doc type": {
-		"prefix": "dt",
-		"body": [
+        ]
+    },
+    "doc type": {
+        "prefix": "dt",
+        "body": [
             "/** @type {$0} */"
-		]
-	},
-	"doc param": {
-		"prefix": "dp",
-		"body": [
-            "/** @param {$0} a */"
-		]
-	},
-    "console.log": {
-		"prefix": "cls",
-		"body": [
+        ]
+    },
+    "console.log(\"\")": {
+        "prefix": ["cls"],
+        "body": [
             "console.log(\"$0\")"
-		]
+        ]
+    },
+    "console.log()": {
+        "prefix": ["cl"],
+        "body": [
+            "console.log($0)"
+        ]
     },
     "arrow func": {
-		"prefix": "arr",
-		"body": [
+        "prefix": "arr",
+        "body": [
             "($0) => {}"
-		]
+        ]
     },
     "sveltekit load": {
-		"prefix": "kitload",
-		"body": [
+        "prefix": "kitload",
+        "body": [
             "export const load = ({ }: RequestEvent) => {",
             "    ",
             "}"
-		]
+        ]
     },
     "sveltekit actions": {
-		"prefix": "kitactions",
-		"body": [
+        "prefix": "kitactions",
+        "body": [
             "export const actions: Actions = {",
             "    async $0() {",
             "        ",
             "    }",
             "}"
-		]
+        ]
     },
     "sveltekit import": {
-		"prefix": "kitjs",
-		"body": [
+        "prefix": ["kitimport","kitjs"],
+        "body": [
             "import { $0 } from \"@sveltejs/kit\""
-		]
+        ]
     },
-    "import": {
-		"prefix": "impor",
-		"body": [
+    "impor": {
+        "prefix": ["import","impor"],
+        "body": [
             "import { } from \"$0\""
-		]
+        ]
     },
     "check if its browser": {
-		"prefix": "isbrowser",
-		"body": [
+        "prefix": "isbrowser",
+        "body": [
             "typeof process == 'undefined'"
-		]
+        ]
+    },
+    "for": {
+        "prefix": "fori",
+        "body": [
+            "for (let i = 0;i < $0.length;i ++) {","    ","}"
+        ]
+    },
+    "for in": {
+        "prefix": "forin",
+        "body": [
+            "for (const e in $0) {","    ","}"
+        ]
+    },
+    "for of": {
+        "prefix": "forof",
+        "body": [
+            "for (const e of $0) {","    ","}"
+        ]
+    },
+    "try": {
+        "prefix": "try",
+        "body": [
+            "try {","    ","} catch (err) {","    ","}"
+        ]
+    },
+    "class": {
+        "prefix": ["class","cls"],
+        "body": ["class $0 {","    ","}"]
     }
 }

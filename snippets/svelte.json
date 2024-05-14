@@ -1,6 +1,6 @@
 {
 	"function": {
-		"prefix": "sct",
+		"prefix": "sc",
 		"body": [
             "<script lang=\"ts\">", "", "</script>"
 		]

@@ -1,0 +1,18 @@
+{
+    "main": {
+        "prefix": "main",
+        "body": [
+            "public static void main(String[] args) {",
+            "    ",
+            "}"
+        ]
+    },
+    "class": {
+        "prefix": "class",
+        "body": [
+            "class $0 {",
+            "    ",
+            "}"
+        ]
+    }
+}

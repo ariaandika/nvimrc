@@ -46,6 +46,31 @@ local function lua_ls()
     }
 end
 
+local function tw_ls()
+    require('lspconfig').tailwindcss.setup{
+        settings = {
+            tailwindCSS = {
+                suggestions = false,
+                classAttributes = { "class", "cx", "tw", "base" },
+            }
+        },
+        on_attach = function(client)
+            on_attach(client)
+            -- not work
+            client.server_capabilities.completionProvider = false
+        end,
+        capabilities = capabilities
+    }
+end
+
+local function db_ls()
+    require'lspconfig'.sqls.setup{
+        on_attach = function(client, bufnr)
+            require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+        end
+    }
+end
+
 local function lsp_setup()
     require("mason").setup({})
     -- require('lspconfig').rust_analyzer.setup()
@@ -58,6 +83,8 @@ local function lsp_setup()
             }
         end,
         lua_ls = lua_ls,
+        tailwindcss = tw_ls,
+        sqls = db_ls
     }
 
     -- Sveltekit
@@ -74,16 +101,12 @@ local function lsp_setup()
             })
         end,
     })
-
 end
-
-
-
 
 local function cmp_setup()
     local cmp = require('cmp')
 
-    require("luasnip.loaders.from_vscode").load({paths = "./snippets"})
+    require("luasnip.loaders.from_vscode").load({paths = "~/dev/config/nvim/snippets"})
 
     cmp.setup({
         snippet = { expand = function(args)
@@ -133,6 +156,8 @@ local function cmp_setup()
 end
 
 local function extra_setup()
+    require("neodev").setup({})
+
     require("flutter-tools").setup({
         lsp = {
             capabilities = capabilities,
@@ -140,12 +165,15 @@ local function extra_setup()
         }
     })
 
+    -- local trouble = require("trouble")
+    -- trouble.setup({ icons = false })
+    -- set("n", "<leader>tt", trouble.toggle, desc("Trouble: toggle"))
+    -- set("n", "]d", function() trouble.next({ skip_groups = true, jump = true }) end,     desc("Trouble: next"))
+    -- set("n", "[d", function() trouble.previous({ skip_groups = true, jump = true }) end, desc("Trouble: previous"))
+end
 
-    local trouble = require("trouble")
-    trouble.setup({ icons = false })
-    set("n", "<leader>tt", trouble.toggle, desc("Trouble: toggle"))
-    set("n", "]d", function() trouble.next({ skip_groups = true, jump = true }) end,     desc("Trouble: next"))
-    set("n", "[d", function() trouble.previous({ skip_groups = true, jump = true }) end, desc("Trouble: previous"))
+if os.getenv("LSP") == "0" then
+    return
 end
 
 so("nvim-lspconfig")
@@ -160,15 +188,14 @@ so("cmp-cmdline",1)
 so("LuaSnip")
 so("cmp_luasnip",1)
 
-so("neodev.nvim")
-
+so("sqls.nvim",1)
 
 lsp_setup()
 cmp_setup()
 
-
+so("neodev.nvim")
 so("flutter-tools.nvim")
-so("trouble.nvim")
+-- so("trouble.nvim")
 
 extra_setup()
 

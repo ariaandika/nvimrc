@@ -60,7 +60,7 @@ end,  desc("Telescope: grep string"))
 so("harpoon")
 local harpoon = require("harpoon")
 harpoon:setup()
-set("n", "<leader>a", function() harpoon:list():append() end)
+set("n", "<leader>a", function() harpoon:list():add() end)
 set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 set("n", "<M-q>", function() harpoon:list():select(1) end)
 set("n", "<M-w>", function() harpoon:list():select(2) end)
@@ -80,3 +80,20 @@ require('which-key').setup({})
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+so("todo-comments.nvim")
+require('todo-comments').setup({
+    keywords = {
+        ERROR = {
+            color = "error",
+        }
+    }
+})
+
+so("nvim-web-devicons")
+require'nvim-web-devicons'.setup({})
+
+so("nvim-tree.lua")
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+require("nvim-tree").setup({})
+vim.keymap.set('n', '\\', '<C-w>w')

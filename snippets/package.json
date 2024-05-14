@@ -1,7 +1,7 @@
 {
-	"name": "example-snippets",
-	"contributes": {
-		"snippets": [
+    "name": "example-snippets",
+    "contributes": {
+        "snippets": [
             {
                 "language": [
                     "javascript", "typescript",
@@ -10,7 +10,19 @@
                     "svelte"
                 ],
                 "path": "./js.json"
+            },
+            {
+                "language": [
+                    "java"
+                ],
+                "path": "./java.json"
+            },
+            {
+                "language": [
+                    "rust", "rs"
+                ],
+                "path": "./rust.json"
             }
-		]
-	}
+        ]
+    }
 }

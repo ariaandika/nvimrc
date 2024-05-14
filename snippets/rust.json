@@ -1,0 +1,42 @@
+{
+    "fn": {
+        "prefix": "fn",
+        "body": [
+            "fn $0() {",
+            "    ",
+            "}"
+        ]
+    },
+    "pub fn": {
+        "prefix": "pfn",
+        "body": [
+            "pub fn $0() {",
+            "    ",
+            "}"
+        ]
+    },
+    "fn return": {
+        "prefix": "fnr",
+        "body": [
+            "fn $0() -> Result<(),Error> {",
+            "    ",
+            "}"
+        ]
+    },
+    "pub fn return": {
+        "prefix": "pfnr",
+        "body": [
+            "pub fn $0() -> Result<(),Error> {",
+            "    ",
+            "}"
+        ]
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": [
+            "struct $0 {",
+            "    ",
+            "}"
+        ]
+    }
+}
