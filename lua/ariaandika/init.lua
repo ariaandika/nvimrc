@@ -94,8 +94,27 @@ require('todo-comments').setup({
 so("nvim-web-devicons")
 require'nvim-web-devicons'.setup({})
 
-so("nvim-tree.lua")
+so("nui.nvim")
+
+-- so("nvim-tree.lua")
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- require("nvim-tree").setup({})
+-- vim.keymap.set('n', '\\', '<C-w>w')
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-require("nvim-tree").setup({})
-vim.keymap.set('n', '\\', '<C-w>w')
+-- vim.keymap.set('n', '\\', '<C-w>w')
+vim.keymap.set('n', '\\', ':Neotree current<CR>')
+so("neo-tree.nvim")
+require('neo-tree').setup({
+    filesystem = {
+        filtered_items = {
+            hide_by_name = {
+                "node_modules"
+            },
+        },
+        hijack_netrw_behavior = "open_current"
+    },
+})
+
