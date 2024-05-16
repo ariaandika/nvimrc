@@ -96,16 +96,9 @@ require'nvim-web-devicons'.setup({})
 
 so("nui.nvim")
 
--- so("nvim-tree.lua")
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- require("nvim-tree").setup({})
--- vim.keymap.set('n', '\\', '<C-w>w')
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
--- vim.keymap.set('n', '\\', '<C-w>w')
-vim.keymap.set('n', '\\', ':Neotree current<CR>')
+vim.keymap.set('n', '\\', ':Neotree current toggle reveal<CR>', { silent = true })
 so("neo-tree.nvim")
 require('neo-tree').setup({
     filesystem = {
