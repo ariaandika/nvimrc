@@ -30,6 +30,8 @@ require('nvim-treesitter.configs').setup({
 
 
 
+so("vim-fugitive")
+set('n', '<leader>gs', vim.cmd.Git, desc("GitFugitive: git status"))
 so("plenary.nvim")
 so("telescope.nvim")
 local builtin = require("telescope.builtin")
