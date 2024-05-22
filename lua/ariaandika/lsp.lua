@@ -19,8 +19,8 @@ local function on_attach(ev)
     set("n", ";", vim.diagnostic.open_float, o)
     set("n", "<leader>gf", vim.lsp.buf.format)
 
-    set("n", "<leader>vws", vim.lsp.workspace_symbol, o)
-    set("n", "<leader>rr", vim.lsp.references, o)
+    -- set("n", "<leader>vws", vim.lsp.workspace_symbol, o)
+    -- set("n", "<leader>rr", vim.lsp.references, o)
 end
 
 local function lua_ls()
