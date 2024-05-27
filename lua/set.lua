@@ -9,12 +9,12 @@ vim.cmd[[command Wq wq]]
 vim.cmd[[command Q q]]
 
 vim.api.nvim_exec([[
-  autocmd InsertEnter * inoremap { {}<Esc>i
-  autocmd InsertEnter * inoremap ( ()<Esc>i
-  autocmd InsertEnter * inoremap [ []<Esc>i
-  autocmd InsertEnter * inoremap " ""<Esc>i
-  autocmd InsertEnter * inoremap ' ''<Esc>i
-  autocmd InsertEnter * inoremap < <><Esc>i
+  autocmd InsertEnter * inoremap { {}<Left>
+  autocmd InsertEnter * inoremap ( ()<Left>
+  autocmd InsertEnter * inoremap [ []<Left>
+  autocmd InsertEnter * inoremap " ""<Left>
+  autocmd InsertEnter * inoremap ' ''<Left>
+  autocmd InsertEnter * inoremap < <><Left>
 ]], false)
 
 vim.opt.guicursor = ""

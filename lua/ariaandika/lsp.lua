@@ -63,14 +63,6 @@ local function tw_ls()
     }
 end
 
-local function db_ls()
-    require'lspconfig'.sqls.setup{
-        on_attach = function(client, bufnr)
-            require('sqls').on_attach(client, bufnr) -- require sqls.nvim
-        end
-    }
-end
-
 local function lsp_setup()
     require("mason").setup({})
     -- require('lspconfig').rust_analyzer.setup()
@@ -84,7 +76,6 @@ local function lsp_setup()
         end,
         lua_ls = lua_ls,
         tailwindcss = tw_ls,
-        sqls = db_ls
     }
 
     -- Sveltekit
@@ -105,12 +96,14 @@ end
 
 local function cmp_setup()
     local cmp = require('cmp')
+    local luasnip = require('luasnip')
+    luasnip.config.setup({})
 
     require("luasnip.loaders.from_vscode").load({paths = "~/dev/config/nvim/snippets"})
 
     cmp.setup({
         snippet = { expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end },
         mapping = cmp.mapping.preset.insert({
             ['<C-up>'] = cmp.mapping.scroll_docs(-4),
@@ -190,8 +183,8 @@ so("cmp_luasnip",1)
 
 so("sqls.nvim",1)
 
-lsp_setup()
 cmp_setup()
+lsp_setup()
 
 so("neodev.nvim")
 so("flutter-tools.nvim")
