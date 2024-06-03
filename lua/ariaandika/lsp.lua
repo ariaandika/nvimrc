@@ -46,23 +46,6 @@ local function lua_ls()
     }
 end
 
-local function tw_ls()
-    require('lspconfig').tailwindcss.setup{
-        settings = {
-            tailwindCSS = {
-                suggestions = false,
-                classAttributes = { "class", "cx", "tw", "base" },
-            }
-        },
-        on_attach = function(client)
-            on_attach(client)
-            -- not work
-            client.server_capabilities.completionProvider = false
-        end,
-        capabilities = capabilities
-    }
-end
-
 local function lsp_setup()
     require("mason").setup({})
     -- require('lspconfig').rust_analyzer.setup()
@@ -75,23 +58,22 @@ local function lsp_setup()
             }
         end,
         lua_ls = lua_ls,
-        tailwindcss = tw_ls,
     }
 
     -- Sveltekit
-    vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = { "*.js", "*.ts" },
-                callback = function(ctx)
-                    if client.name == "svelte" then
-                        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-                    end
-                end,
-            })
-        end,
-    })
+    -- vim.api.nvim_create_autocmd("LspAttach", {
+    --     callback = function(args)
+    --         local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --         vim.api.nvim_create_autocmd("BufWritePost", {
+    --             pattern = { "*.js", "*.ts" },
+    --             callback = function(ctx)
+    --                 if client.name == "svelte" then
+    --                     client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+    --                 end
+    --             end,
+    --         })
+    --     end,
+    -- })
 end
 
 local function cmp_setup()
