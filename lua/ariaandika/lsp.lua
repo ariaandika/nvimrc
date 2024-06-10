@@ -57,6 +57,20 @@ local function lsp_setup()
                 capabilities = capabilities
             }
         end,
+        rust_analyzer = function()
+            require('lspconfig').rust_analyzer.setup{
+                settings = {
+                    -- prevent code dimming when using cfg(feature = deez)
+                    ["rust-analyzer"] = {
+                        cargo = {
+                            features = "all",
+                        },
+                    },
+                },
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
+        end,
         lua_ls = lua_ls,
     }
 
