@@ -39,6 +39,7 @@ local actions = require("telescope.actions")
 pcall(require('telescope').load_extension, 'fzf')
 require("telescope").setup({
     defaults = {
+        preview = false,
         mappings = {
             i = { ["<esc>"] = actions.close },
         },
