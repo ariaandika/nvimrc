@@ -75,19 +75,19 @@ local function lsp_setup()
     }
 
     -- Sveltekit
-    -- vim.api.nvim_create_autocmd("LspAttach", {
-    --     callback = function(args)
-    --         local client = vim.lsp.get_client_by_id(args.data.client_id)
-    --         vim.api.nvim_create_autocmd("BufWritePost", {
-    --             pattern = { "*.js", "*.ts" },
-    --             callback = function(ctx)
-    --                 if client.name == "svelte" then
-    --                     client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-    --                 end
-    --             end,
-    --         })
-    --     end,
-    -- })
+    vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = { "*.js", "*.ts", "*.d.ts" },
+                callback = function(ctx)
+                    if client ~= nil and client.name == "svelte" then
+                        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+                    end
+                end,
+            })
+        end,
+    })
 end
 
 local function cmp_setup()

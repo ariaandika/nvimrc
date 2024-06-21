@@ -29,6 +29,13 @@ require('nvim-treesitter.configs').setup({
 })
 
 
+vim.filetype.add({
+    extension = {
+        mdx = "mdx",
+    },
+})
+vim.treesitter.language.register("markdown", "mdx")
+
 
 so("vim-fugitive")
 set('n', '<leader>gs', vim.cmd.Git, desc("GitFugitive: git status"))
@@ -97,7 +104,16 @@ require('todo-comments').setup({
 
 
 so("nvim-web-devicons")
-require'nvim-web-devicons'.setup({})
+require("nvim-web-devicons").setup({
+    strict = true,
+    override_by_extension = {
+        astro = {
+            icon = "",
+            color = "#EF8547",
+            name = "astro",
+        },
+    },
+})
 
 -- vim.keymap.set('n', '\\', ':Ex<CR>', { silent = true })
 vim.g.loaded_netrw = 1
