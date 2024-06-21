@@ -23,6 +23,8 @@ vim.keymap.set({'n','v'}, '<S-Up>', '<Home>4<Up>', { noremap = true })
 vim.keymap.set({'n','v'}, '<S-Down>', '<Home>4<Down>', { noremap = true })
 vim.keymap.set({'n','v'}, '<C-Up>', '<Home>4<Up>', { noremap = true })
 vim.keymap.set({'n','v'}, '<C-Down>', '<Home>4<Down>', { noremap = true })
+vim.keymap.set('i', '<S-Up>', '<Up><Up><Up><Up>', { noremap = true })
+vim.keymap.set('i', '<S-Down>', '<Down><Down><Down><Down>', { noremap = true })
 
 -- util
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv")
