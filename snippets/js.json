@@ -31,8 +31,24 @@
             "}"
         ]
     },
+    "export default function": {
+        "prefix": "edf",
+        "body": [
+            "export default function $0() {",
+            "    ",
+            "}"
+        ]
+    },
+    "export default async function": {
+        "prefix": [ "edasyn", "edaf"],
+        "body": [
+            "export default async function $0() {",
+            "    ",
+            "}"
+        ]
+    },
     "export async function": {
-        "prefix": ["eafunc", "eafn"],
+        "prefix": ["eafunc", "eafn", "easyn"],
         "body": [
             "export async function $0() {",
             "    ",
@@ -51,12 +67,6 @@
         "prefix": "dt",
         "body": [
             "/** @type {$0} */"
-        ]
-    },
-    "console.log(\"\")": {
-        "prefix": ["cls"],
-        "body": [
-            "console.log(\"$0\")"
         ]
     },
     "console.log()": {
@@ -95,10 +105,16 @@
             "import { $0 } from \"@sveltejs/kit\""
         ]
     },
-    "impor": {
+    "import": {
         "prefix": ["import","impor"],
         "body": [
             "import { } from \"$0\""
+        ]
+    },
+    "import default": {
+        "prefix": ["importd","impord"],
+        "body": [
+            "import $0 from \"\""
         ]
     },
     "check if its browser": {
@@ -113,26 +129,10 @@
             "for (let i = 0;i < $0.length;i ++) {","    ","}"
         ]
     },
-    "for in": {
-        "prefix": "forin",
-        "body": [
-            "for (const e in $0) {","    ","}"
-        ]
-    },
-    "for of": {
-        "prefix": "forof",
-        "body": [
-            "for (const e of $0) {","    ","}"
-        ]
-    },
     "try": {
         "prefix": "try",
         "body": [
             "try {","    ","} catch (err) {","    ","}"
         ]
-    },
-    "class": {
-        "prefix": ["class","cls"],
-        "body": ["class $0 {","    ","}"]
     }
 }

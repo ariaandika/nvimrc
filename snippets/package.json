@@ -6,15 +6,19 @@
                 "language": [
                     "javascript", "typescript",
                     "js","ts",
+                    "javascriptreact",
+                    "typescriptreact",
                     "jsx", "tsx",
                     "svelte"
                 ],
                 "path": "./js.json"
             },
             {
-                "language": [
-                    "java"
-                ],
+                "language": [ "svelte" ],
+                "path": "./svelte.json"
+            },
+            {
+                "language": [ "java" ],
                 "path": "./java.json"
             }
         ]
