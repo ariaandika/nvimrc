@@ -82,7 +82,7 @@ set("n", "<M-r>", function() harpoon:list():select(4) end)
 so("Comment.nvim")
 require('Comment').setup({
     toggler = { line = '<C-_>' },
-    opleader = { line = '<C-_>' },
+    opleader = { line = '<C-_>', block = '<leader>gb' },
 })
 
 so("which-key.nvim")
