@@ -133,9 +133,9 @@ require('neo-tree').setup({
     hijack_netrw_behavior = "open_current"
   },
   default_component_configs = {
-    -- file_size = {
-    --   enabled = false,
-    -- },
+    file_size = {
+      enabled = false,
+    },
     type = {
       enabled = false,
     },
