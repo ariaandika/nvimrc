@@ -1,8 +1,14 @@
 {
-	"function": {
-		"prefix": "sc",
-		"body": [
-            "<script lang=\"ts\">", "", "</script>"
-		]
-	}
+  "script js": {
+    "prefix": "scj",
+    "body": [ "<script lang=\"ts\">\n  $0\n</script>" ]
+  },
+  "script ts": {
+    "prefix": "sc",
+    "body": [ "<script lang=\"ts\">\n  $0\n</script>" ]
+  },
+  "script module": {
+    "prefix": "scm",
+    "body": [ "<script context=\"module\" lang=\"ts\">\n  $0\n</script>" ]
+  }
 }

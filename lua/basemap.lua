@@ -13,7 +13,6 @@ vim.keymap.set('v', '<', "<gv")
 vim.keymap.set('v', '<Tab>', ">gv")
 vim.keymap.set('v', '<S-Tab>', "<gv")
 
-vim.keymap.set('n', 'Q', "<nop>")
 vim.keymap.set('n', 'zq', "@q")
 
 -- navigation
@@ -39,12 +38,12 @@ vim.keymap.set('i', '<M-Enter>', "<Esc><Esc>o")
 
 vim.keymap.set('x', '<leader>p', "\"_dP")
 vim.keymap.set('x', '<M-p>', "\"_dP")
+vim.keymap.set('n', 'Q', "<leader>+y")
 
 vim.keymap.set({'n','v'}, '<leader>y', "\"+y")
 vim.keymap.set({'n','v'}, '<leader>Y', "\"+Y")
 
-vim.keymap.set('n', '<leader>d', "\"_d")
-vim.keymap.set('v', '<leader>d', "\"_d")
+vim.keymap.set({'n','v'}, '<leader>d', "\"_d")
 
 vim.keymap.set('n', '<leader>s', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
 vim.keymap.set('v', '<leader>s', '"ry:%s/\\(<C-r>r\\)/<C-r>r/gI<Left><Left><Left>')

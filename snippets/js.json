@@ -1,138 +1,102 @@
 {
-    "if": {
-        "prefix": "if",
-        "body": [
-            "if ($0) {",
-            "    ",
-            "}"
-        ]
-    },
-    "else if": {
-        "prefix": "elseif",
-        "body": [
-            "else if ($0) {",
-            "    ",
-            "}"
-        ]
-    },
-    "function": {
-        "prefix": ["func", "fn"],
-        "body": [
-            "function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "export function": {
-        "prefix": ["efunc", "efn"],
-        "body": [
-            "export function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "export default function": {
-        "prefix": "edf",
-        "body": [
-            "export default function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "export default async function": {
-        "prefix": [ "edasyn", "edaf"],
-        "body": [
-            "export default async function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "export async function": {
-        "prefix": ["eafunc", "eafn", "easyn"],
-        "body": [
-            "export async function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "async func": {
-        "prefix": ["asyn","async"],
-        "body": [
-            "async function $0() {",
-            "    ",
-            "}"
-        ]
-    },
-    "doc type": {
-        "prefix": "dt",
-        "body": [
-            "/** @type {$0} */"
-        ]
-    },
-    "console.log()": {
-        "prefix": ["cl"],
-        "body": [
-            "console.log($0)"
-        ]
-    },
-    "arrow func": {
-        "prefix": "arr",
-        "body": [
-            "($0) => {}"
-        ]
-    },
-    "sveltekit load": {
-        "prefix": "kitload",
-        "body": [
-            "export const load = ({ }: RequestEvent) => {",
-            "    ",
-            "}"
-        ]
-    },
-    "sveltekit actions": {
-        "prefix": "kitactions",
-        "body": [
-            "export const actions: Actions = {",
-            "    async $0() {",
-            "        ",
-            "    }",
-            "}"
-        ]
-    },
-    "sveltekit import": {
-        "prefix": ["kitimport","kitjs"],
-        "body": [
-            "import { $0 } from \"@sveltejs/kit\""
-        ]
-    },
-    "import": {
-        "prefix": ["import","impor"],
-        "body": [
-            "import { } from \"$0\""
-        ]
-    },
-    "import default": {
-        "prefix": ["importd","impord"],
-        "body": [
-            "import $0 from \"\""
-        ]
-    },
-    "check if its browser": {
-        "prefix": "isbrowser",
-        "body": [
-            "typeof process == 'undefined'"
-        ]
-    },
-    "for": {
-        "prefix": "fori",
-        "body": [
-            "for (let i = 0;i < $0.length;i ++) {","    ","}"
-        ]
-    },
-    "try": {
-        "prefix": "try",
-        "body": [
-            "try {","    ","} catch (err) {","    ","}"
-        ]
-    }
+  "if": {
+    "prefix": "if",
+    "body": [ "if ($0) {\n  \n}" ]
+  },
+  "else if": {
+    "prefix": "elseif",
+    "body": [ "else if ($0) {\n  \n}" ]
+  },
+  "export default": {
+    "prefix": "ed",
+    "body": [ "export default $0;" ]
+  },
+  "for": {
+    "prefix": "fori",
+    "body": [ "for (let i = 0;i < $0.length;i ++) {\n  \n}" ]
+  },
+  "for of": {
+    "prefix": ["ff","forof"],
+    "body": [ "for (const i of $0) {\n  \n}" ]
+  },
+  "try": {
+    "prefix": "try",
+    "body": [ "try {\n  $0\n} catch (err) {\n  \n}" ]
+  },
+  "arrow func": {
+    "prefix": "arr",
+    "body": [ "($0) => {}" ]
+  },
+  "map": {
+    "prefix": "map",
+    "body": [ "$0.map(e => {\n  \n})" ]
+  },
+  ".map": {
+    "prefix": ".map",
+    "body": [ ".map(e => {\n  $0\n})" ]
+  },
+  "function": {
+    "prefix": ["func", "fn"],
+    "body": [ "function $0() {\n  \n}" ]
+  },
+  "async func": {
+    "prefix": ["asyn","async"],
+    "body": [ "async function $0() {\n  \n}" ]
+  },
+  "export function": {
+    "prefix": ["efunc", "efn"],
+    "body": [ "export function $0() {\n  \n}" ]
+  },
+  "export async function": {
+    "prefix": ["eafunc", "eafn", "easyn"],
+    "body": [ "export async function $0() {\n  \n}" ]
+  },
+  "export default function": {
+    "prefix": "edf",
+    "body": [ "export default function $0() {\n  \n}" ]
+  },
+  "export default async function": {
+    "prefix": [ "edasyn", "edaf"],
+    "body": [ "export default async function $0() {\n  \n}" ]
+  },
+  "doc type": {
+    "prefix": "dt",
+    "body": [ "/** @type {$0} */" ]
+  },
+  "console log": {
+    "prefix": ["cl","log"],
+    "body": [ "console.log($0)" ]
+  },
+  "console error": {
+    "prefix": ["cerr","error"],
+    "body": [ "console.error($0)" ]
+  },
+  "import": {
+    "prefix": ["impor","import"],
+    "body": [ "import { } from \"$0\"" ]
+  },
+  "import default": {
+    "prefix": ["impord","importd"],
+    "body": [ "import $0 from \"\"" ]
+  },
+  "import type": {
+    "prefix": ["it","impot","importt"],
+    "body": [ "import type { } from \"$0\"" ]
+  },
+  "sveltekit import": {
+    "prefix": ["kitimport","kitjs"],
+    "body": [ "import { $0 } from \"@sveltejs/kit\"" ]
+  },
+  "sveltekit load": {
+    "prefix": "kitload",
+    "body": [ "export const load = ({ }: RequestEvent$0) => {\n  \n}" ]
+  },
+  "sveltekit actions": {
+    "prefix": "kitactions",
+    "body": [ "export const actions: Actions = {\n  async $0() {\n  \n}\n}" ]
+  },
+  "check if its browser": {
+    "prefix": "isbrowser",
+    "body": [ "typeof process == 'undefined'" ]
+  }
 }

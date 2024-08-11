@@ -8,25 +8,25 @@ vim.cmd[[command WA wall]]
 vim.cmd[[command Wq wq]]
 vim.cmd[[command Q q]]
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec2([[
   autocmd InsertEnter * inoremap { {}<Left>
   autocmd InsertEnter * inoremap ( ()<Left>
   autocmd InsertEnter * inoremap [ []<Left>
   autocmd InsertEnter * inoremap " ""<Left>
   autocmd InsertEnter * inoremap ' ''<Left>
   autocmd InsertEnter * inoremap < <><Left>
-]], false)
+]],{})
 
 vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.timeout = false
 
-vim.opt.shiftwidth = 4          -- when use "<" or ">"
+vim.opt.shiftwidth = 2          -- when use "<" or ">"
 vim.opt.expandtab = true        -- use spaces by default
-vim.opt.tabstop = 4             -- 1 tab = 2 space
+vim.opt.tabstop = 2             -- 1 tab = 2 space
 vim.opt.smartindent = true      -- smart indent
-vim.opt.softtabstop = 4
+vim.opt.softtabstop = 2
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -48,4 +48,12 @@ vim.opt.smartcase = true
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+  end
+})
 

@@ -6,13 +6,13 @@ local so = function(id) vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id)
 so("onedark.nvim")
 local c = require("onedark.palette")
 require('onedark').setup({
-    style = 'dark',
-    transparent = true,
-    highlights = {
-        ["@parameter"] = {fmt = 'italic,bold'},
-        ["@parameter.reference"] = {fg = c.dark.red},
-    },
-    code_style = { comments = 'bold' }
+  style = 'dark',
+  transparent = true,
+  highlights = {
+    ["@parameter"] = {fmt = 'italic,bold'},
+    ["@parameter.reference"] = {fg = c.dark.red},
+  },
+  code_style = { comments = 'bold' }
 })
 require('onedark').load()
 
@@ -20,20 +20,19 @@ require('onedark').load()
 
 so("nvim-treesitter")
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { "javascript", "typescript", "svelte", "lua", "rust", "jsdoc", "json", "markdown" },
-    sync_install = false,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    }
+  ensure_installed = {
+    "javascript", "typescript", "svelte", "lua", "rust", "jsdoc", "json", "markdown"
+  },
+  sync_install = false,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  }
 })
 
 
 vim.filetype.add({
-    extension = {
-        mdx = "mdx",
-    },
-})
+  extension = { mdx = "mdx" } })
 vim.treesitter.language.register("markdown", "mdx")
 
 
@@ -45,24 +44,24 @@ local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 pcall(require('telescope').load_extension, 'fzf')
 require("telescope").setup({
-    defaults = {
-        preview = false,
-        mappings = {
-            i = { ["<esc>"] = actions.close },
-        },
+  defaults = {
+    preview = false,
+    mappings = {
+      i = { ["<esc>"] = actions.close },
     },
-    pickers = {
-        find_files = {
-            find_command = { "rg", "--files", "--hidden", "--glob", "!**/{.git,node_modules}/*" },
-        },
+  },
+  pickers = {
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/{.git,node_modules,.svelte-kit}/*" },
     },
+  },
 })
 set('n', '<tab>', builtin.buffers,            desc("Telescope: buffer"))
 set('n', '<leader><tab>', builtin.find_files, desc("Telescope: all file"))
 set('n', '<leader>fd', builtin.diagnostics,   desc("Telescope: diagnostic"))
 set('n', '<leader>fp', builtin.builtin,       desc("Telescope: all builtin"))
 set('n', '<leader>fs', function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+  builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end,  desc("Telescope: grep string"))
 
 
@@ -81,8 +80,8 @@ set("n", "<M-r>", function() harpoon:list():select(4) end)
 
 so("Comment.nvim")
 require('Comment').setup({
-    toggler = { line = '<C-_>' },
-    opleader = { line = '<C-_>', block = '<leader>gb' },
+  toggler = { line = '<C-_>' },
+  opleader = { line = '<C-_>', block = '<leader>gb' },
 })
 
 so("which-key.nvim")
@@ -92,27 +91,23 @@ vim.o.timeoutlen = 300
 
 so("todo-comments.nvim")
 require('todo-comments').setup({
-    keywords = {
-        LATEST = {
-            color = "error",
-        },
-        ERROR = {
-            color = "error",
-        }
-    }
+  keywords = {
+    LATEST = { color = "error", },
+    ERROR = { color = "error", }
+  }
 })
 
 
 so("nvim-web-devicons")
 require("nvim-web-devicons").setup({
-    strict = true,
-    override_by_extension = {
-        astro = {
-            icon = "",
-            color = "#EF8547",
-            name = "astro",
-        },
+  strict = true,
+  override_by_extension = {
+    astro = {
+      icon = "",
+      color = "#EF8547",
+      name = "astro",
     },
+  },
 })
 
 -- vim.keymap.set('n', '\\', ':Ex<CR>', { silent = true })
@@ -124,32 +119,32 @@ vim.keymap.set('n', '\\', ':Neotree float toggle reveal<CR>', { silent = true })
 vim.keymap.set('n', '<leader>\\', ':Neotree current toggle reveal<CR>', { silent = true })
 so("neo-tree.nvim")
 require('neo-tree').setup({
-    enable_diagnostics = false,
-    enable_git_status = false,
-    filesystem = {
-        filtered_items = {
-            hide_by_name = {
-                "node_modules"
-            },
-            always_show = {
-                ".env",
-            },
-        },
-        hijack_netrw_behavior = "open_current"
+  enable_diagnostics = false,
+  enable_git_status = false,
+  filesystem = {
+    filtered_items = {
+      hide_by_name = {
+        "node_modules"
+      },
+      always_show = {
+        ".env",
+      },
     },
-    default_component_configs = {
-        file_size = {
-            enabled = false,
-        },
-        type = {
-            enabled = false,
-        },
-        last_modified = {
-            enabled = false,
-        },
-        created = {
-            enabled = false,
-        },
+    hijack_netrw_behavior = "open_current"
+  },
+  default_component_configs = {
+    -- file_size = {
+    --   enabled = false,
+    -- },
+    type = {
+      enabled = false,
     },
+    last_modified = {
+      enabled = false,
+    },
+    created = {
+      enabled = false,
+    },
+  },
 })
 

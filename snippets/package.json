@@ -1,26 +1,26 @@
 {
-    "name": "example-snippets",
-    "contributes": {
-        "snippets": [
-            {
-                "language": [
-                    "javascript", "typescript",
-                    "js","ts",
-                    "javascriptreact",
-                    "typescriptreact",
-                    "jsx", "tsx",
-                    "svelte"
-                ],
-                "path": "./js.json"
-            },
-            {
-                "language": [ "svelte" ],
-                "path": "./svelte.json"
-            },
-            {
-                "language": [ "java" ],
-                "path": "./java.json"
-            }
-        ]
-    }
+  "name": "example-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "javascript", "typescript",
+          "js","ts",
+          "javascriptreact",
+          "typescriptreact",
+          "jsx", "tsx",
+          "svelte"
+        ],
+        "path": "./js.json"
+      },
+      {
+        "language": ["svelte"],
+        "path": "./svelte.json"
+      },
+      {
+        "language": ["rust"],
+        "path": "./rust.json"
+      }
+    ]
+  }
 }
