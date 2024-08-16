@@ -1,7 +1,7 @@
 {
   "script js": {
     "prefix": "scj",
-    "body": [ "<script lang=\"ts\">\n  $0\n</script>" ]
+    "body": [ "<script>\n  $0\n</script>" ]
   },
   "script ts": {
     "prefix": "sc",
