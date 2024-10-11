@@ -1,0 +1,6 @@
+{
+  "block jinja": {
+    "prefix": "block",
+    "body": [ "{% block $0 %}", "", "{% endblock %}" ]
+  }
+}

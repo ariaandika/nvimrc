@@ -84,11 +84,6 @@ require('Comment').setup({
   opleader = { line = '<C-_>', block = '<leader>gb' },
 })
 
-so("which-key.nvim")
-require('which-key').setup({})
-vim.o.timeout = true
-vim.o.timeoutlen = 300
-
 so("todo-comments.nvim")
 require('todo-comments').setup({
   keywords = {

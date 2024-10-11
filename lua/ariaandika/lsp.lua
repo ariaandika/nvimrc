@@ -1,5 +1,4 @@
 local set = vim.keymap.set
-local desc = function(d) return { desc = d } end
 local capabilities = nil
 local so = function(id,after)
   vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id)
@@ -47,6 +46,14 @@ local function lua_ls()
 end
 
 local function lsp_setup()
+  vim.diagnostic.config({
+    virtual_text = {
+      severity = 'ERROR',
+      virt_text_pos = 'eol',
+      prefix = 'Deez:',
+    }
+  })
+
   require("mason").setup({})
   require("mason-lspconfig").setup({})
   require("mason-lspconfig").setup_handlers {
@@ -70,7 +77,7 @@ local function lsp_setup()
         capabilities = capabilities
       }
     end,
-    tsserver = function()
+    ts_ls = function()
       so('typescript-tools.nvim')
       require("typescript-tools").setup{
         on_attach = on_attach,
