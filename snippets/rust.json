@@ -1,11 +1,11 @@
 {
   "main": {
     "prefix": "main",
-    "body": [ "pub fn main() {\n    $0\n}" ]
+    "body": [ "fn main() {\n    $0\n}" ]
   },
   "tokio main": {
     "prefix": "tokiomain",
-    "body": [ "#[tokio::main]\npub async fn main() {\n    $0\n}" ]
+    "body": [ "#[tokio::main]\nasync fn main() {\n    $0\n}" ]
   },
   "async fn": {
     "prefix": "asyn",
