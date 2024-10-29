@@ -101,6 +101,11 @@ local function lsp_setup()
       })
     end,
   })
+
+  require('lspconfig').gleam.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+  })
 end
 
 local function cmp_setup()
