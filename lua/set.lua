@@ -8,6 +8,9 @@ vim.cmd[[command WA wall]]
 vim.cmd[[command Wq wq]]
 vim.cmd[[command Q q]]
 
+-- overwrite TreeSitter :EditQuery, it keeps biting me
+vim.cmd[[command E noh]]
+
 vim.api.nvim_exec2([[
   autocmd InsertEnter * inoremap { {}<Left>
   autocmd InsertEnter * inoremap ( ()<Left>
