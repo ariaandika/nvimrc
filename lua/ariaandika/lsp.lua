@@ -64,6 +64,10 @@ local function lsp_setup()
       }
     end,
     rust_analyzer = function()
+      if os.getenv("RUST_LSP") == "0" then
+        return
+      end
+
       require('lspconfig').rust_analyzer.setup{
         settings = {
           -- prevent code dimming when using cfg(feature = deez)
@@ -129,9 +133,11 @@ local function cmp_setup()
   require("luasnip.loaders.from_vscode").load({paths = "~/dev/config/nvim/snippets"})
 
   cmp.setup({
-    snippet = { expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end },
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end
+    },
     mapping = cmp.mapping.preset.insert({
       ['<C-up>'] = cmp.mapping.scroll_docs(-4),
       ['<C-down>'] = cmp.mapping.scroll_docs(4),
