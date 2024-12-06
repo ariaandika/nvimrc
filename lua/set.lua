@@ -52,11 +52,15 @@ vim.opt.smartcase = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust",
-  callback = function()
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.tabstop = 4
-  end
-})
+local large_indent = { "rust", "cpp" }
+
+for i = 1, #large_indent, 1 do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = large_indent[i],
+    callback = function()
+      vim.opt_local.shiftwidth = 4
+      vim.opt_local.tabstop = 4
+    end
+  })
+end
 
