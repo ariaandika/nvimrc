@@ -75,6 +75,10 @@
     "prefix": "dt",
     "body": [ "/** @type {$0} */" ]
   },
+  "doc param": {
+    "prefix": "dm",
+    "body": [ "/**", "  * @param {$0}", "  */" ]
+  },
   "console log": {
     "prefix": ["cl","log"],
     "body": [ "console.log($0)" ]
