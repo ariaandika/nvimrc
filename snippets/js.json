@@ -79,6 +79,10 @@
     "prefix": "dm",
     "body": [ "/**", "  * @param {$0}", "  */" ]
   },
+  "todo": {
+    "prefix": "todo",
+    "body": [ "throw new Error('TODO$0')" ]
+  },
   "console log": {
     "prefix": ["cl","log"],
     "body": [ "console.log($0)" ]
