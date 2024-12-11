@@ -52,11 +52,14 @@ require("telescope").setup({
       find_command = { "rg", "--files", "--hidden", "--glob", "!**/{.git,node_modules,.svelte-kit}/*" },
     },
   },
+  extensions = {
+    fzf = {}
+  }
 })
 set('n', '<tab>', builtin.buffers,            desc("Telescope: buffer"))
-set('n', '<leader><tab>', builtin.find_files, desc("Telescope: all file"))
 set('n', '<leader>fd', builtin.diagnostics,   desc("Telescope: diagnostic"))
 set('n', '<leader>fp', builtin.builtin,       desc("Telescope: all builtin"))
+set('n', '<leader><tab>', builtin.find_files, desc("Telescope: all file"))
 set('n', '<leader>fs', function()
   builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end,  desc("Telescope: grep string"))
