@@ -1,6 +1,6 @@
 {
   "if": {
-    "prefix": "if",
+    "prefix": ["if","ifl"],
     "body": [ "if ($0) {\n  \n}" ]
   },
   "else if": {
@@ -44,7 +44,7 @@
     "body": [ "function $0() {\n  \n}" ]
   },
   "async func": {
-    "prefix": ["asyn","async"],
+    "prefix": ["afn","asyn","async"],
     "body": [ "async function $0() {\n  \n}" ]
   },
   "export function": {
