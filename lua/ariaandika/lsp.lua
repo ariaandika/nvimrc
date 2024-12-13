@@ -1,9 +1,9 @@
 local set = vim.keymap.set
 local capabilities = nil
 local so = function(id,after)
-  vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id)
+  vim.opt.rtp:append(PLUGIN_SRC .. id)
   if after then
-    vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id .. "/after")
+    vim.opt.rtp:append(PLUGIN_SRC .. id .. "/after")
   end
 end
 
@@ -130,7 +130,7 @@ local function cmp_setup()
   local luasnip = require('luasnip')
   luasnip.config.setup({})
 
-  require("luasnip.loaders.from_vscode").load({paths = "~/dev/config/nvim/snippets"})
+  require("luasnip.loaders.from_vscode").load({paths = NVIMRC .. "/snippets"})
 
   cmp.setup({
     snippet = {

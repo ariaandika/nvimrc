@@ -1,6 +1,6 @@
 local set = vim.keymap.set
 local desc = function(d) return { desc = d } end
-local so = function(id) vim.opt.rtp:append("~/.local/share/nvim/plugins/" .. id) end
+local so = function(id) vim.opt.rtp:append(PLUGIN_SRC .. id) end
 
 
 so("onedark.nvim")
