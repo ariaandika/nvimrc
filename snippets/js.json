@@ -11,6 +11,14 @@
     "prefix": "ed",
     "body": [ "export default $0;" ]
   },
+  "export const": {
+    "prefix": "ecc",
+    "body": [ "export const " ]
+  },
+  "export class": {
+    "prefix": "ecs",
+    "body": [ "export class $0 {\n \n}" ]
+  },
   "for": {
     "prefix": "fori",
     "body": [ "for (let i = 0;i < $0.length;i ++) {\n  \n}" ]
