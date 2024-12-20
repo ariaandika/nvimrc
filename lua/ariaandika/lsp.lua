@@ -182,8 +182,6 @@ local function cmp_setup()
 end
 
 local function extra_setup()
-  require("neodev").setup({})
-
   require("flutter-tools").setup({
     lsp = {
       capabilities = capabilities,
