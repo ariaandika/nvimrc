@@ -9,6 +9,6 @@
   },
   "script module": {
     "prefix": "scm",
-    "body": [ "<script context=\"module\" lang=\"ts\">\n  $0\n</script>" ]
+    "body": [ "<script module lang=\"ts\">\n  $0\n</script>" ]
   }
 }
