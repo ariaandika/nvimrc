@@ -157,12 +157,13 @@ local function cmp_setup()
     }),
     enabled = function()
       local context = require('cmp.config.context')
-      if vim.api.nvim_get_mode().mode == 'c' then
-        return true
-      else
+      -- else
+      -- local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+      -- if buftype == "prompt" then
+      --   return false
+      -- end
         return not context.in_treesitter_capture("comment")
         and not context.in_syntax_group("Comment")
-      end
     end
   })
 
