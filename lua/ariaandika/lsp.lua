@@ -72,6 +72,9 @@ local function lsp_setup()
         settings = {
           -- prevent code dimming when using cfg(feature = deez)
           ["rust-analyzer"] = {
+            diagnostics = {
+              disabled = { "inactive-code" }
+            },
             cargo = {
               features = "all",
             },
