@@ -14,5 +14,39 @@
   "pub async fn": {
     "prefix": ["paf","pasn"],
     "body": [ "pub async fn $0() {\n    \n}" ]
+  },
+  "struct error": {
+    "prefix": ["errorstruct"],
+    "body": [
+      "pub struct FooError {\n",
+      "}\n",
+      "use std::fmt;\n",
+      "impl std::error::Error for FooError { }\n",
+      "impl fmt::Display for FooError {\n",
+      "    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {",
+      "        write!(f, \"DeezNutz\")",
+      "    }",
+      "}\n",
+      "impl fmt::Debug for FooError {",
+      "    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {",
+      "        write!(f, \"\\\"{self}\\\"\")",
+      "    }",
+      "}"
+    ]
+  },
+  "macro rules from": {
+    "prefix": ["macrofrom"],
+    "body": [
+        "/// from!(Error: e => Self { });",
+        "macro_rules! from {",
+        "    ($$fr:ty: $$pat:pat => $$body:expr) => {",
+        "        impl From<$$fr> for FooError {",
+        "            fn from($$pat: $$fr) -> Self {",
+        "                $$body",
+        "            }",
+        "        }",
+        "    };",
+        "}"
+    ]
   }
 }

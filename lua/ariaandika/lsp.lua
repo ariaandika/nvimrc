@@ -22,90 +22,117 @@ local function on_attach(ev)
   set("n", "<leader>gf", vim.lsp.buf.format)
 end
 
-local function lua_ls()
-  require('lspconfig').lua_ls.setup{
-    settings = {
-      Lua = {
-        runtime = { version = 'LuaJIT' },
-        completion = { showWord = "Disable" },
-        semantic = { variable = false },
-        diagnostics = { globals = {'vim'}, },
-        workspace = {
-          library = {vim.env.VIMRUNTIME},
-          checkThirdParty = false,
-        },
-        telemetry = { enable = false },
-      },
-    },
-    root_dir = function()
-      return vim.loop.cwd()
-    end,
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
-end
+-- local function lua_ls()
+--   require('lspconfig').lua_ls.setup{
+--     settings = {
+--       Lua = {
+--         runtime = { version = 'LuaJIT' },
+--         completion = { showWord = "Disable" },
+--         semantic = { variable = false },
+--         diagnostics = { globals = {'vim'}, },
+--         workspace = {
+--           library = {vim.env.VIMRUNTIME},
+--           checkThirdParty = false,
+--         },
+--         telemetry = { enable = false },
+--       },
+--     },
+--     root_dir = function()
+--       return vim.loop.cwd()
+--     end,
+--     on_attach = on_attach,
+--     capabilities = capabilities
+--   }
+-- end
 
 local function lsp_setup()
   vim.diagnostic.config({
     virtual_text = {
       severity = 'ERROR',
-      virt_text_pos = 'eol',
+      virt_text_pos = 'eol_right_align',
+      source = true,
       prefix = 'Deez:',
     }
   })
 
-  require("mason").setup({})
-  require("mason-lspconfig").setup({})
-  require("mason-lspconfig").setup_handlers {
-    function (server_name)
-      require("lspconfig")[server_name].setup {
-        on_attach = on_attach,
-        capabilities = capabilities
-      }
-    end,
-    rust_analyzer = function()
-      if os.getenv("RUST_LSP") == "0" then
-        return
-      end
+  local cap = vim.lsp.protocol.make_client_capabilities()
 
-      require('lspconfig').rust_analyzer.setup{
-        settings = {
-          -- prevent code dimming when using cfg(feature = deez)
-          ["rust-analyzer"] = {
-            diagnostics = {
-              disabled = { "inactive-code" }
-            },
-            cargo = {
-              features = "all",
+  vim.lsp.config("*", {
+    on_attach = on_attach,
+    capabilities = cap
+  })
+
+  require("typescript-tools").setup{
+    on_attach = on_attach,
+    capabilities = cap
+  }
+
+  vim.lsp.config.rust_analyzer = {
+    on_attach = on_attach,
+    capabilities = cap,
+    settings = {
+      ['rust-analyzer'] = {
+        diagnostics = {
+          disabled = { "inactive-code" }
+        },
+        cargo = {
+          features = "all",
+        },
+        check = {
+          command = 'clippy',
+        },
+        -- [source](https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs)
+        completion = {
+          snippets = {
+            custom = {
+              pin = {
+                postfix = "pin",
+                body = "pin!(${receiver})",
+                requires = "std::pin::pin",
+                description = "Wrap the expression in a `pin!`",
+                scope = "expr",
+              },
+              ready = {
+                postfix = "ready",
+                body = "ready!(${receiver})",
+                requires = "std::task::ready",
+                description = "Wrap the expression in a `ready!`",
+                scope = "expr",
+              },
+              ["Poll::Ready"] = {
+                postfix = "pollready",
+                body = "Ready(${receiver})",
+                requires = "std::task::Poll::{self, *}",
+                description = "Wrap the expression in a `Poll::Ready`",
+                scope = "expr",
+              },
+              ["ifletErr"] = {
+                postfix = "ife",
+                body = {
+                  "if let Err($0) = ${receiver} {",
+                  "    ",
+                  "};",
+                },
+                requires = "std::task::ready",
+                description = "Wrap the expression in a `ready!`",
+                scope = "expr",
+              },
             },
           },
         },
-        on_attach = on_attach,
-        capabilities = capabilities
-      }
-
-      -- workaround for horrible bug
-      -- [issue](https://github.com/neovim/neovim/issues/30985)
-      for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-          local default_diagnostic_handler = vim.lsp.handlers[method]
-          vim.lsp.handlers[method] = function(err, result, context, config)
-              if err ~= nil and err.code == -32802 then
-                  return
-              end
-              return default_diagnostic_handler(err, result, context, config)
-          end
-      end
-
-    end,
-    ts_ls = function()
-      so('typescript-tools.nvim')
-      require("typescript-tools").setup{
-        on_attach = on_attach,
-        capabilities = capabilities
-      }
-    end,
-    lua_ls = lua_ls,
+        hover = {
+          show = {
+            traitAssocItems = 5,
+          },
+        },
+      },
+    }
   }
+
+  require("mason").setup({})
+  require("mason-lspconfig").setup({
+    ensure_installed = { "rust_analyzer" }
+  })
 
   -- Sveltekit
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -207,6 +234,7 @@ so("LuaSnip")
 so("cmp_luasnip",1)
 
 so("sqls.nvim",1)
+so('typescript-tools.nvim')
 
 cmp_setup()
 lsp_setup()
