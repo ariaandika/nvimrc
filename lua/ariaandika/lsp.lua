@@ -43,6 +43,24 @@ local function lsp_setup()
     capabilities = cap,
   }
 
+  vim.lsp.config.lua_ls = {
+    on_attach = on_attach,
+    capabilities = cap,
+    settings = {
+      Lua = {
+        runtime = { version = 'LuaJIT' },
+        completion = { showWord = "Disable" },
+        semantic = { variable = false },
+        diagnostics = { globals = {'vim'}, },
+        workspace = {
+          library = {vim.env.VIMRUNTIME},
+          checkThirdParty = false,
+        },
+        telemetry = { enable = false },
+      },
+    },
+  }
+
   vim.lsp.config.rust_analyzer = {
     on_attach = on_attach,
     capabilities = cap,
