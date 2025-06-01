@@ -1,5 +1,4 @@
 local set = vim.keymap.set
-local capabilities = nil
 local so = function(id,after)
   vim.opt.rtp:append(PLUGIN_SRC .. id)
   if after then
@@ -22,29 +21,6 @@ local function on_attach(ev)
   set("n", "<leader>gf", vim.lsp.buf.format)
 end
 
--- local function lua_ls()
---   require('lspconfig').lua_ls.setup{
---     settings = {
---       Lua = {
---         runtime = { version = 'LuaJIT' },
---         completion = { showWord = "Disable" },
---         semantic = { variable = false },
---         diagnostics = { globals = {'vim'}, },
---         workspace = {
---           library = {vim.env.VIMRUNTIME},
---           checkThirdParty = false,
---         },
---         telemetry = { enable = false },
---       },
---     },
---     root_dir = function()
---       return vim.loop.cwd()
---     end,
---     on_attach = on_attach,
---     capabilities = capabilities
---   }
--- end
-
 local function lsp_setup()
   vim.diagnostic.config({
     virtual_text = {
@@ -52,19 +28,19 @@ local function lsp_setup()
       virt_text_pos = 'eol_right_align',
       source = true,
       prefix = 'Deez:',
-    }
+    },
   })
 
   local cap = vim.lsp.protocol.make_client_capabilities()
 
   vim.lsp.config("*", {
     on_attach = on_attach,
-    capabilities = cap
+    capabilities = cap,
   })
 
   require("typescript-tools").setup{
     on_attach = on_attach,
-    capabilities = cap
+    capabilities = cap,
   }
 
   vim.lsp.config.rust_analyzer = {
@@ -129,10 +105,9 @@ local function lsp_setup()
     }
   }
 
-  require("mason").setup({})
-  require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer" }
-  })
+  vim.lsp.config.svelte = {
+    on_attach = function(ev)
+      on_attach(ev)
 
   -- Sveltekit
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -149,10 +124,15 @@ local function lsp_setup()
     end,
   })
 
-  require('lspconfig').gleam.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
+  require("mason").setup()
+  require("mason-lspconfig").setup({
+    ensure_installed = { "rust_analyzer", "lua_ls" }
   })
+
+  -- require('lspconfig').gleam.setup({
+  --   on_attach = on_attach,
+  --   capabilities = capabilities
+  -- })
 end
 
 local function cmp_setup()
@@ -208,18 +188,16 @@ local function cmp_setup()
     {{ name = 'path' }}, {{ name = 'cmdline' }}
     )
   })
-
-  capabilities = require('cmp_nvim_lsp').default_capabilities()
 end
 
-local function extra_setup()
-  require("flutter-tools").setup({
-    lsp = {
-      capabilities = capabilities,
-      on_attach = on_attach
-    }
-  })
-end
+-- local function extra_setup()
+--   require("flutter-tools").setup({
+--     lsp = {
+--       capabilities = cap,
+--       on_attach = on_attach
+--     }
+--   })
+-- end
 
 so("nvim-lspconfig")
 so("mason.nvim")
@@ -242,5 +220,5 @@ lsp_setup()
 so("neodev.nvim")
 so("flutter-tools.nvim")
 
-extra_setup()
+-- extra_setup()
 
