@@ -1,4 +1,12 @@
 {
+  "refs": {
+    "prefix": "refs",
+    "body": [ "&" ]
+  },
+  "std::error::Error": {
+    "prefix": "error",
+    "body": [ "std::error::Error" ]
+  },
   "main": {
     "prefix": "main",
     "body": [ "fn main() {\n    $0\n}" ]
