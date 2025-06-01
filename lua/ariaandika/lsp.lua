@@ -145,20 +145,19 @@ local function lsp_setup()
     on_attach = function(ev)
       on_attach(ev)
 
-  -- Sveltekit
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      -- Sveltekit
       vim.api.nvim_create_autocmd("BufWritePost", {
         pattern = { "*.js", "*.ts", "*.d.ts" },
         callback = function(ctx)
-          if client ~= nil and client.name == "svelte" then
-            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-          end
+          ev.notify("$/onDidChangeTsOrJsFile", {
+            uri = ctx.match,
+            message = "for fuck sake"
+          })
         end,
       })
     end,
-  })
+    capabilities = cap,
+  }
 
   require("mason").setup()
   require("mason-lspconfig").setup({
