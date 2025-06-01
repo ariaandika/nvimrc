@@ -79,6 +79,25 @@ local function lsp_setup()
         completion = {
           snippets = {
             custom = {
+              -- somehow the default Ok, Err, Some is gone
+              Ok = {
+                postfix = "ok",
+                body = "Ok(${receiver})",
+                description = "Wrap the expression in a `Ok`",
+                scope = "expr",
+              },
+              Err = {
+                postfix = "err",
+                body = "Err(${receiver})",
+                description = "Wrap the expression in a `Err`",
+                scope = "expr",
+              },
+              Some = {
+                postfix = "some",
+                body = "Some(${receiver})",
+                description = "Wrap the expression in a `Some`",
+                scope = "expr",
+              },
               pin = {
                 postfix = "pin",
                 body = "pin!(${receiver})",
@@ -87,16 +106,16 @@ local function lsp_setup()
                 scope = "expr",
               },
               ready = {
-                postfix = "ready",
+                postfix = "unready",
                 body = "ready!(${receiver})",
                 requires = "std::task::ready",
                 description = "Wrap the expression in a `ready!`",
                 scope = "expr",
               },
               ["Poll::Ready"] = {
-                postfix = "pollready",
-                body = "Ready(${receiver})",
-                requires = "std::task::Poll::{self, *}",
+                postfix = { "pollready", "ready" },
+                body = "Poll::Ready(${receiver})",
+                requires = "std::task::Poll",
                 description = "Wrap the expression in a `Poll::Ready`",
                 scope = "expr",
               },
@@ -107,7 +126,6 @@ local function lsp_setup()
                   "    ",
                   "};",
                 },
-                requires = "std::task::ready",
                 description = "Wrap the expression in a `ready!`",
                 scope = "expr",
               },
