@@ -161,7 +161,10 @@ local function lsp_setup()
 
   require("mason").setup()
   require("mason-lspconfig").setup({
-    ensure_installed = { "rust_analyzer", "lua_ls" }
+    ensure_installed = { "rust_analyzer", "lua_ls" },
+    automatic_enable = {
+        exclude = { "ts_ls" }
+    }
   })
 
   -- require('lspconfig').gleam.setup({
