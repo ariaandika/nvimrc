@@ -16,7 +16,7 @@ vim.api.nvim_exec2([[
   autocmd InsertEnter * inoremap ( ()<Left>
   autocmd InsertEnter * inoremap [ []<Left>
   autocmd InsertEnter * inoremap " ""<Left>
-  autocmd InsertEnter * inoremap ' ''<Left>
+  " autocmd InsertEnter * inoremap ' ''<Left>
   autocmd InsertEnter * inoremap < <><Left>
 ]],{})
 
