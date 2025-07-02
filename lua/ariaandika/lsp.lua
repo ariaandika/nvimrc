@@ -76,49 +76,10 @@ local function lsp_setup()
           command = 'clippy',
         },
         -- [source](https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs)
+        -- if we provide custom snippets, the default was overwritten, apparantly its intentional
         completion = {
           snippets = {
             custom = {
-              -- somehow the default Ok, Err, Some is gone
-              Ok = {
-                postfix = "ok",
-                body = "Ok(${receiver})",
-                description = "Wrap the expression in a `Ok`",
-                scope = "expr",
-              },
-              Err = {
-                postfix = "err",
-                body = "Err(${receiver})",
-                description = "Wrap the expression in a `Err`",
-                scope = "expr",
-              },
-              Some = {
-                postfix = "some",
-                body = "Some(${receiver})",
-                description = "Wrap the expression in a `Some`",
-                scope = "expr",
-              },
-              pin = {
-                postfix = "pin",
-                body = "pin!(${receiver})",
-                requires = "std::pin::pin",
-                description = "Wrap the expression in a `pin!`",
-                scope = "expr",
-              },
-              ready = {
-                postfix = "unready",
-                body = "ready!(${receiver})",
-                requires = "std::task::ready",
-                description = "Wrap the expression in a `ready!`",
-                scope = "expr",
-              },
-              ["Poll::Ready"] = {
-                postfix = { "pollready", "ready" },
-                body = "Poll::Ready(${receiver})",
-                requires = "std::task::Poll",
-                description = "Wrap the expression in a `Poll::Ready`",
-                scope = "expr",
-              },
               ["ifletErr"] = {
                 postfix = "ife",
                 body = {
@@ -128,6 +89,45 @@ local function lsp_setup()
                 },
                 description = "Wrap the expression in a `ready!`",
                 scope = "expr",
+              },
+              ["Arc::new"] = {
+                postfix = "arc",
+                body = "Arc::new(${receiver})",
+                requires = "std::sync::Arc",
+                description = "Put the expression into an `Arc`",
+                scope = "expr"
+              },
+              ["Rc::new"] = {
+                postfix = "rc",
+                body = "Rc::new(${receiver})",
+                requires = "std::rc::Rc",
+                description = "Put the expression into an `Rc`",
+                scope = "expr"
+              },
+              ["Box::pin"] = {
+                postfix = "pinbox",
+                body = "Box::pin(${receiver})",
+                requires = "std::boxed::Box",
+                description = "Put the expression into a pinned `Box`",
+                scope = "expr"
+              },
+              ["Ok"] = {
+                postfix = "ok",
+                body = "Ok(${receiver})",
+                description = "Wrap the expression in a `Result::Ok`",
+                scope = "expr"
+              },
+              ["Err"] = {
+                postfix = "err",
+                body = "Err(${receiver})",
+                description = "Wrap the expression in a `Result::Err`",
+                scope = "expr"
+              },
+              ["Some"] = {
+                postfix = "some",
+                body = "Some(${receiver})",
+                description = "Wrap the expression in an `Option::Some`",
+                scope = "expr"
               },
             },
           },
