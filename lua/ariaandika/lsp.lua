@@ -77,17 +77,40 @@ local function lsp_setup()
         },
         -- [source](https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs)
         -- if we provide custom snippets, the default was overwritten, apparantly its intentional
+        --
+        -- but somehow `.ifl`, `.ref`, and `.refm` still works
         completion = {
           snippets = {
             custom = {
-              ["ifletErr"] = {
+              ["ifElse"] = {
                 postfix = "ife",
+                body = {
+                  "if ${receiver} {",
+                  "    ",
+                  "} else {",
+                  "    ",
+                  "}",
+                },
+                scope = "expr",
+              },
+              ["ifletErr"] = {
+                postfix = { "ifr", "iferr" },
                 body = {
                   "if let Err($0) = ${receiver} {",
                   "    ",
-                  "};",
+                  "}",
                 },
-                description = "Wrap the expression in a `ready!`",
+                scope = "expr",
+              },
+              ["ifletOkElse"] = {
+                postfix = "ifle",
+                body = {
+                  "if let Ok($0) = ${receiver} {",
+                  "    ",
+                  "} else {",
+                  "    ",
+                  "}",
+                },
                 scope = "expr",
               },
               ["Arc::new"] = {
@@ -127,6 +150,27 @@ local function lsp_setup()
                 postfix = "some",
                 body = "Some(${receiver})",
                 description = "Wrap the expression in an `Option::Some`",
+                scope = "expr"
+              },
+              ["Poll::Ready"] = {
+                postfix = { "ready", "poll", "polled" },
+                body = "Poll::Ready(${receiver})",
+                requires = "std::task::Poll",
+                description = "Put the expression into an `Poll::Ready`",
+                scope = "expr"
+              },
+              ["Poll::Ready(Ok())"] = {
+                postfix = "pok",
+                body = "Poll::Ready(Ok(${receiver}))",
+                requires = "std::task::Poll",
+                description = "Put the expression into an `Poll::Ready(Ok())`",
+                scope = "expr"
+              },
+              ["Poll::Ready(Err())"] = {
+                postfix = "perr",
+                body = "Poll::Ready(Err(${receiver}))",
+                requires = "std::task::Poll",
+                description = "Put the expression into an `Poll::Ready(Err())`",
                 scope = "expr"
               },
             },
