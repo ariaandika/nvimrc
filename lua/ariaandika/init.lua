@@ -88,6 +88,7 @@ so("todo-comments.nvim")
 require('todo-comments').setup({
   keywords = {
     LATEST = { color = "error", },
+    FEAT = { color = "info", },
     ERROR = { color = "error", }
   }
 })
