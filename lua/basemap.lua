@@ -7,6 +7,7 @@ vim.keymap.set('n', '<C-u>', "<C-u>zz")
 vim.keymap.set('n', 'n', "nzzzv")
 vim.keymap.set('n', 'N', "Nzzzv")
 vim.keymap.set('n', 'G', "Gzz")
+vim.keymap.set('n', '<M-Tab>', ":q")
 
 vim.keymap.set('v', '>', ">gv")
 vim.keymap.set('v', '<', "<gv")
@@ -16,6 +17,9 @@ vim.keymap.set('v', '<S-Tab>', "<gv")
 vim.keymap.set('n', 'zq', "@q")
 
 -- navigation
+vim.keymap.set('n', '<M-[>', ':cprev<CR>')
+vim.keymap.set('n', '<M-]>', ':cnext<CR>')
+vim.keymap.set('i', '<S-Up>', '<Up><Up><Up><Up>', { noremap = true })
 vim.keymap.set({'n','v'}, '<PageUp>', '10<Up>', { noremap = true })
 vim.keymap.set({'n','v'}, '<PageDown>', '10<Down>', { noremap = true })
 vim.keymap.set({'n','v'}, '<S-Up>', '<Home>4<Up>', { noremap = true })
@@ -48,6 +52,19 @@ vim.keymap.set({'n','v'}, '<leader>d', "\"_d")
 vim.keymap.set('n', '<leader>s', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')
 vim.keymap.set('v', '<leader>s', '"ry:%s/\\(<C-r>r\\)/<C-r>r/gI<Left><Left><Left>')
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>')
-vim.keymap.set('n', '<leader>;', '<cmd>!bun run %<CR>')
+vim.keymap.set('n', '<leader>;', '<cmd>!cargo run %<CR>')
 
 -- vim.keymap.set('n', 'cdd', '*N:noh<CR>cgn');
+
+vim.keymap.set('n', '<M-Tab>', function()
+    local lib_file = 'src/lib.rs'
+    local main_file = 'src/main.rs'
+
+    if vim.fn.filereadable(lib_file) == 1 then
+        vim.cmd('edit ' .. lib_file)
+    elseif vim.fn.filereadable(main_file) == 1 then
+        vim.cmd('edit ' .. main_file)
+    else
+        print('no rust entry found')
+    end
+end)
