@@ -1,3 +1,5 @@
+IS_RUST = vim.fn.filereadable("Cargo.toml") == 1
+
 local g = vim.g
 
 g.shiftwidth = 4
@@ -52,15 +54,14 @@ vim.opt.smartcase = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
-local large_indent = { "rust", "c", "cpp", "zig" }
+local indent4 = { "rust", "c", "cpp", "zig" }
 
-for i = 1, #large_indent, 1 do
+for i = 1, #indent4, 1 do
   vim.api.nvim_create_autocmd("FileType", {
-    pattern = large_indent[i],
+    pattern = indent4[i],
     callback = function()
       vim.opt_local.shiftwidth = 4
       vim.opt_local.tabstop = 4
     end
   })
 end
-
