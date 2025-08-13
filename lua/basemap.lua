@@ -57,19 +57,22 @@ vim.keymap.set('n', '<leader>;', '<cmd>!cargo run %<CR>')
 -- vim.keymap.set('n', 'cdd', '*N:noh<CR>cgn');
 
 local function entrypoint()
-  local lib_file = 'src/lib.rs'
-  local main_file = 'src/main.rs'
-  local initlua = 'init.lua'
+  local entries = {
+    "src/lib.rs",
+    "src/main.rs",
+    "init.lua",
+  }
 
-  if vim.fn.glob(lib_file) == 1 then
-      vim.cmd('edit ' .. lib_file)
-  elseif vim.fn.glob(main_file) == 1 then
-      vim.cmd('edit ' .. main_file)
-  elseif vim.fn.glob(initlua) == 1 then
-      vim.cmd('edit ' .. initlua)
-  else
-      print('no project entrypoint found')
+  for _, value in ipairs(entries) do
+    local entry = vim.fn.glob(value)
+
+    if entry ~= "" then
+      vim.cmd('edit ' .. entry)
+      return
+    end
   end
+
+  print('no project entrypoint found')
 end
 
 vim.keymap.set('n', '<M-Tab>', entrypoint, { desc = "Project: Entrypoint" })
