@@ -79,38 +79,24 @@ local function lsp_setup()
         -- if we provide custom snippets, the default was overwritten, apparantly its intentional
         --
         -- but somehow `.ifl`, `.ref`, and `.refm` still works
+        --
+        -- https://rust-analyzer.github.io/book/configuration#completion.snippets.custom
         completion = {
           snippets = {
             custom = {
               ["ifElse"] = {
                 postfix = "ife",
-                body = {
-                  "if ${receiver} {",
-                  "    ",
-                  "} else {",
-                  "    ",
-                  "}",
-                },
+                body = "if ${receiver} {\n    \n} else {\n    \n}",
                 scope = "expr",
               },
               ["ifletErr"] = {
                 postfix = { "ifr", "iferr" },
-                body = {
-                  "if let Err($0) = ${receiver} {",
-                  "    ",
-                  "}",
-                },
+                body = "if let Err($0) = ${receiver} {\n    \n}",
                 scope = "expr",
               },
               ["ifletOkElse"] = {
                 postfix = "ifle",
-                body = {
-                  "if let Ok($0) = ${receiver} {",
-                  "    ",
-                  "} else {",
-                  "    ",
-                  "}",
-                },
+                body = "if let Ok($0) = ${receiver} {\n    \n} else {\n    \n}",
                 scope = "expr",
               },
               ["Arc::new"] = {
