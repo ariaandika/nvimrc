@@ -2,6 +2,7 @@ local set = vim.keymap.set
 local desc = function(d) return { desc = d } end
 local so = function(id) vim.opt.rtp:append(PLUGIN_SRC .. id) end
 
+-- ===== OneDark Theme =====
 
 so("onedark.nvim")
 local c = require("onedark.palette")
@@ -16,7 +17,7 @@ require('onedark').setup({
 })
 require('onedark').load()
 
-
+-- ===== Treesitter =====
 
 so("nvim-treesitter")
 require('nvim-treesitter.configs').setup({
@@ -32,39 +33,12 @@ require('nvim-treesitter.configs').setup({
 
 vim.treesitter.language.register("markdown", "mdx")
 
+-- ===== Git Fugitive =====
 
 so("vim-fugitive")
 set('n', '<leader>gs', vim.cmd.Git, desc("GitFugitive: git status"))
-so("plenary.nvim")
-so("telescope.nvim")
-local builtin = require("telescope.builtin")
-local actions = require("telescope.actions")
-pcall(require('telescope').load_extension, 'fzf')
-require("telescope").setup({
-  defaults = {
-    preview = false,
-    mappings = {
-      i = { ["<esc>"] = actions.close },
-    },
-  },
-  pickers = {
-    find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/{.git,node_modules,.svelte-kit}/*" },
-    },
-  },
-  extensions = {
-    fzf = {}
-  }
-})
-set('n', '<tab>', builtin.buffers,            desc("Telescope: buffer"))
-set('n', '<leader>fd', builtin.diagnostics,   desc("Telescope: diagnostic"))
-set('n', '<leader>fp', builtin.builtin,       desc("Telescope: all builtin"))
-set('n', '<leader><tab>', builtin.find_files, desc("Telescope: all file"))
-set('n', '<leader>fs', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end,  desc("Telescope: grep string"))
 
-
+-- ===== Harpoon =====
 
 so("harpoon")
 local harpoon = require("harpoon")
@@ -76,13 +50,15 @@ set("n", "<M-w>", function() harpoon:list():select(2) end)
 set("n", "<M-e>", function() harpoon:list():select(3) end)
 set("n", "<M-r>", function() harpoon:list():select(4) end)
 
-
+-- ===== Comment =====
 
 so("Comment.nvim")
 require('Comment').setup({
   toggler = { line = '<C-_>' },
   opleader = { line = '<C-_>', block = '<leader>gb' },
 })
+
+-- ===== Todo Comment =====
 
 so("todo-comments.nvim")
 require('todo-comments').setup({
@@ -93,6 +69,7 @@ require('todo-comments').setup({
   }
 })
 
+-- ===== Neotree =====
 
 so("nvim-web-devicons")
 require("nvim-web-devicons").setup({
