@@ -13,6 +13,15 @@ local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 local conf = require("telescope.config").values
 
+require("telescope").setup {
+  defaults = {
+    preview = false,
+    mappings = {
+      i = { ["<esc>"] = actions.close }
+    },
+  },
+}
+
 local opts = {
   cwd = cwd,
   preview = false,
