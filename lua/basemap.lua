@@ -56,15 +56,20 @@ vim.keymap.set('n', '<leader>;', '<cmd>!cargo run %<CR>')
 
 -- vim.keymap.set('n', 'cdd', '*N:noh<CR>cgn');
 
-vim.keymap.set('n', '<M-Tab>', function()
-    local lib_file = 'src/lib.rs'
-    local main_file = 'src/main.rs'
+local function entrypoint()
+  local lib_file = 'src/lib.rs'
+  local main_file = 'src/main.rs'
+  local initlua = 'init.lua'
 
-    if vim.fn.filereadable(lib_file) == 1 then
-        vim.cmd('edit ' .. lib_file)
-    elseif vim.fn.filereadable(main_file) == 1 then
-        vim.cmd('edit ' .. main_file)
-    else
-        print('no rust entry found')
-    end
-end)
+  if vim.fn.glob(lib_file) == 1 then
+      vim.cmd('edit ' .. lib_file)
+  elseif vim.fn.glob(main_file) == 1 then
+      vim.cmd('edit ' .. main_file)
+  elseif vim.fn.glob(initlua) == 1 then
+      vim.cmd('edit ' .. initlua)
+  else
+      print('no project entrypoint found')
+  end
+end
+
+vim.keymap.set('n', '<M-Tab>', entrypoint, { desc = "Project: Entrypoint" })
