@@ -50,6 +50,12 @@ set("n", "<M-w>", function() harpoon:list():select(2) end)
 set("n", "<M-e>", function() harpoon:list():select(3) end)
 set("n", "<M-r>", function() harpoon:list():select(4) end)
 
+-- ===== Oil =====
+
+so("oil.nvim")
+require("oil").setup()
+set("n", "\\", ":Oil<CR>", desc("Oil: Oil nvim"))
+
 -- ===== Comment =====
 
 so("Comment.nvim")
@@ -69,55 +75,10 @@ require('todo-comments').setup({
   }
 })
 
--- ===== Neotree =====
+-- ===== Icons =====
 
 so("nvim-web-devicons")
 require("nvim-web-devicons").setup({
   strict = true,
-  override_by_extension = {
-    astro = {
-      icon = "",
-      color = "#EF8547",
-      name = "astro",
-    },
-  },
-})
-
--- vim.keymap.set('n', '\\', ':Ex<CR>', { silent = true })
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-so("nui.nvim")
-vim.keymap.set('n', '\\', ':Neotree float toggle reveal<CR>', { silent = true })
-vim.keymap.set('n', '<leader>\\', ':Neotree current toggle reveal<CR>', { silent = true })
-so("neo-tree.nvim")
-require('neo-tree').setup({
-  enable_diagnostics = false,
-  enable_git_status = false,
-  filesystem = {
-    filtered_items = {
-      hide_by_name = {
-        "node_modules"
-      },
-      always_show = {
-        ".env",
-      },
-    },
-    hijack_netrw_behavior = "open_current"
-  },
-  default_component_configs = {
-    file_size = {
-      enabled = false,
-    },
-    type = {
-      enabled = false,
-    },
-    last_modified = {
-      enabled = false,
-    },
-    created = {
-      enabled = false,
-    },
-  },
 })
 
