@@ -33,26 +33,26 @@ local opts = {
   -- theme = "ivy",
 }
 
-local default_command = { "rg", "--files", "--color=never" }
-local command = { "rg", "--files", "--color=never" }
+local all_files_cmd = { "rg", "--files", "--color=never" }
+local project_files_cmd = { "rg", "--files", "--color=never" }
 
 if IS_RUST then
-  table.insert(command, "src")
-  table.insert(command, "Cargo.toml")
-end
-
-local function project_files()
-  pickers.new(opts, {
-    prompt_title = "Project Files",
-    finder = finders.new_oneshot_job(command, opts),
-    sorter = conf.file_sorter(opts),
-  }):find()
+  table.insert(project_files_cmd, "src")
+  table.insert(project_files_cmd, "Cargo.toml")
 end
 
 local function all_files()
   pickers.new(opts, {
     prompt_title = "All Files",
-    finder = finders.new_oneshot_job(default_command, opts),
+    finder = finders.new_oneshot_job(all_files_cmd, opts),
+    sorter = conf.file_sorter(opts),
+  }):find()
+end
+
+local function project_files()
+  pickers.new(opts, {
+    prompt_title = "Project Files",
+    finder = finders.new_oneshot_job(project_files_cmd, opts),
     sorter = conf.file_sorter(opts),
   }):find()
 end
@@ -63,12 +63,19 @@ local function grep_string()
     return
   end
 
-  local rg_command = { "rg", search, "--color=never", "--no-heading", "--smart-case" }
+  local grep_string_cmd = {
+    "rg", "-e", search,
+    "--color=never", "--no-heading", "--smart-case", "--with-filename", "--column"
+  }
+
+  opts.entry_maker = make_entry.gen_from_vimgrep(opts)
 
   pickers.new(opts, {
     prompt_title = "Grep \"" .. search .. "\"",
-    finder = finders.new_oneshot_job(rg_command, opts),
-    sorter = conf.file_sorter(opts),
+    finder = finders.new_oneshot_job(grep_string_cmd, opts),
+    previewer = conf.grep_previewer(opts),
+    sorter = conf.generic_sorter(opts),
+    push_on_cursor_edit = true,
   }):find()
 end
 
