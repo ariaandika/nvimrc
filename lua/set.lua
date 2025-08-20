@@ -1,5 +1,3 @@
-IS_RUST = vim.fn.filereadable("Cargo.toml") == 1
-
 local g = vim.g
 
 g.shiftwidth = 4

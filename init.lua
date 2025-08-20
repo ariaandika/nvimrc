@@ -5,7 +5,7 @@ vim.opt.rtp:prepend(NVIMRC)
 
 require("set")
 require("basemap")
-require("util")
+require("rust")
 require("ariaandika.telescope")
 require("ariaandika.plugins")
 require("ariaandika.lsp")
